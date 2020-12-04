@@ -42,8 +42,8 @@ function isValidPassword(text) {
     }
   }
 
-  let minCount = Number.parseInt(min);
-  let maxCount = Number.parseInt(max);
+  const minCount = Number.parseInt(min);
+  const maxCount = Number.parseInt(max);
 
   return keyLetterCount >= minCount && keyLetterCount <= maxCount;
 }
@@ -66,8 +66,8 @@ function isNewValidPassword(text) {
 
   const keyLetter = letterFluff.substring(0, 1);
 
-  let minCount = Number.parseInt(min);
-  let maxCount = Number.parseInt(max);
+  const minCount = Number.parseInt(min);
+  const maxCount = Number.parseInt(max);
   // console.log("keyLetter", keyLetter);
   // console.log("password", password);
   // // console.log("keyLetterCount", keyLetterCount);
