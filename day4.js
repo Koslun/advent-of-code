@@ -11,9 +11,20 @@ console.log(
   }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`
 );
 
-console.log(textByLine.length);
-console.log(textByLine[0]);
-console.log(textByLine[1]);
+console.log("Number of passports: ", textByLine.length);
+
+const passports = segmentPassports(textByLine);
+
+const validList = passports.map(isValidPassport);
+
+let validCount = 0;
+validList.forEach((valid) => {
+  if (valid) {
+    validCount++;
+  }
+});
+
+console.log("Valid passports", validCount);
 
 function segmentPassports(unformattedPassports) {
   const passports = [];
@@ -28,32 +39,11 @@ function segmentPassports(unformattedPassports) {
   return passports;
 }
 
-const passports = segmentPassports(textByLine);
-
-console.log(passports.length);
-console.log(passports[0]);
-console.log(passports[1]);
-
-console.log(passports[0][0]);
-console.log(passports[2][1]);
-
-const validList = passports.map(isValidPassport);
-
-let validCount = 0;
-validList.forEach((valid) => {
-  if (valid) {
-    validCount++;
-  }
-});
-
-console.log("valid", validCount);
-
 function isValidPassport(passport) {
   // console.log("passport ", passport);
   const fields = passport.trim().split(" ");
   const requiredFields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
   const optionalFields = ["cid"];
-  // const keys = [];
   let noInvalidKey = true;
   let requiredFieldCount = 0;
   for (let i = 0; i < fields.length; i++) {
@@ -104,46 +94,8 @@ function isValidPassport(passport) {
     } else if (!optionalFields.includes(key)) {
       noInvalidKey = false;
     }
-    // keys.push(key);
   }
   // console.log("noInvalidKey", noInvalidKey);
 
   return noInvalidKey && requiredFieldCount === requiredFields.length;
 }
-
-// const textMock = fs.readFileSync("./2020_day3_input.mock.txt", "utf-8");
-// const textByLineMock = textMock.split("\n");
-
-// const treesEncounteredMock = goDownSlopes(textByLineMock, 3, 1);
-
-// console.log("Mock encounter", treesEncounteredMock);
-
-// const treesEncounteredChallenge = goDownSlopes(textByLine, 3, 1);
-
-// console.log("Challenge encounter", treesEncounteredChallenge);
-
-// const strat1 = goDownSlopes(textByLine, 1, 1);
-// const strat2 = goDownSlopes(textByLine, 3, 1);
-// const strat3 = goDownSlopes(textByLine, 5, 1);
-// const strat4 = goDownSlopes(textByLine, 7, 1);
-// const strat5 = goDownSlopes(textByLine, 1, 2);
-
-// const mulResult = strat1 * strat2 * strat3 * strat4 * strat5;
-
-// console.log("Total output", mulResult);
-
-// function goDownSlopes(slopes, right, down) {
-//   let treesEncountered = 0;
-//   let i = down;
-//   let currentSlope = right;
-//   const patternLength = slopes[0].length;
-//   while (i < slopes.length) {
-//     const currentPoint = slopes[i][currentSlope % patternLength];
-//     if (currentPoint === "#") {
-//       treesEncountered++;
-//     }
-//     currentSlope += right;
-//     i += down;
-//   }
-//   return treesEncountered;
-// }
