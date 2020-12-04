@@ -1,0 +1,149 @@
+var fs = require("fs");
+
+const text = fs.readFileSync("./2020_day4_input.txt", "utf-8");
+// const text = fs.readFileSync("./2020_day4_input.mock.txt", "utf-8");
+
+const textByLine = text.split("\n\n");
+
+console.log(
+  `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
+    textByLine.length * textByLine.length
+  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`
+);
+
+console.log(textByLine.length);
+console.log(textByLine[0]);
+console.log(textByLine[1]);
+
+function segmentPassports(unformattedPassports) {
+  const passports = [];
+  for (let i = 0; i < unformattedPassports.length; i++) {
+    const squashedPassportList = unformattedPassports[i].split("\n");
+    let squashedPassport = "";
+    for (let j = 0; j < squashedPassportList.length; j++) {
+      squashedPassport = squashedPassport.concat(squashedPassportList[j], " ");
+    }
+    passports.push(squashedPassport);
+  }
+  return passports;
+}
+
+const passports = segmentPassports(textByLine);
+
+console.log(passports.length);
+console.log(passports[0]);
+console.log(passports[1]);
+
+console.log(passports[0][0]);
+console.log(passports[2][1]);
+
+const validList = passports.map(isValidPassport);
+
+let validCount = 0;
+validList.forEach((valid) => {
+  if (valid) {
+    validCount++;
+  }
+});
+
+console.log("valid", validCount);
+
+function isValidPassport(passport) {
+  // console.log("passport ", passport);
+  const fields = passport.trim().split(" ");
+  const requiredFields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
+  const optionalFields = ["cid"];
+  // const keys = [];
+  let noInvalidKey = true;
+  let requiredFieldCount = 0;
+  for (let i = 0; i < fields.length; i++) {
+    const [key, value] = fields[i].split(":");
+    // console.log("key", key);
+    //  || optionalFields.includes(key)
+    if (requiredFields.includes(key)) {
+      let validKey = true;
+      if ("byr" === key) {
+        let numValue = Number.parseInt(value);
+        validKey = numValue >= 1920 && numValue <= 2002;
+      } else if ("iyr" === key) {
+        let numValue = Number.parseInt(value);
+        validKey = numValue >= 2010 && numValue <= 2020;
+      } else if ("eyr" === key) {
+        let numValue = Number.parseInt(value);
+        validKey = numValue >= 2020 && numValue <= 2030;
+      } else if ("hgt" === key) {
+        let numStr = value.substring(0, value.length - 2);
+        let numValue = Number.parseInt(numStr);
+        if (value.endsWith("cm")) {
+          validKey = numValue >= 150 && numValue <= 193;
+        } else if (value.endsWith("in")) {
+          validKey = numValue >= 59 && numValue <= 76;
+        } else {
+          validKey = false;
+        }
+      } else if ("hcl" === key) {
+        const hexValue = Number.parseInt(value.substring(1, value.length), 16);
+        validKey =
+          value.length === 7 &&
+          value.startsWith("#") &&
+          !Number.isNaN(hexValue);
+      } else if ("ecl" === key) {
+        const eyeColors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
+        validKey = eyeColors.includes(value);
+      } else if ("pid" === key) {
+        const numValueStr = value.replace(/^(-)?0+(0\.|\d)/, "$1$2");
+        const numValue = Number.parseInt(numValueStr);
+        validKey = value.length === 9 && !Number.isNaN(numValue);
+      }
+      if (validKey) {
+        requiredFieldCount++;
+      } else {
+        // console.log("invalid key", key);
+        noInvalidKey = false;
+      }
+    } else if (!optionalFields.includes(key)) {
+      noInvalidKey = false;
+    }
+    // keys.push(key);
+  }
+  // console.log("noInvalidKey", noInvalidKey);
+
+  return noInvalidKey && requiredFieldCount === requiredFields.length;
+}
+
+// const textMock = fs.readFileSync("./2020_day3_input.mock.txt", "utf-8");
+// const textByLineMock = textMock.split("\n");
+
+// const treesEncounteredMock = goDownSlopes(textByLineMock, 3, 1);
+
+// console.log("Mock encounter", treesEncounteredMock);
+
+// const treesEncounteredChallenge = goDownSlopes(textByLine, 3, 1);
+
+// console.log("Challenge encounter", treesEncounteredChallenge);
+
+// const strat1 = goDownSlopes(textByLine, 1, 1);
+// const strat2 = goDownSlopes(textByLine, 3, 1);
+// const strat3 = goDownSlopes(textByLine, 5, 1);
+// const strat4 = goDownSlopes(textByLine, 7, 1);
+// const strat5 = goDownSlopes(textByLine, 1, 2);
+
+// const mulResult = strat1 * strat2 * strat3 * strat4 * strat5;
+
+// console.log("Total output", mulResult);
+
+// function goDownSlopes(slopes, right, down) {
+//   let treesEncountered = 0;
+//   let i = down;
+//   let currentSlope = right;
+//   const patternLength = slopes[0].length;
+//   while (i < slopes.length) {
+//     const currentPoint = slopes[i][currentSlope % patternLength];
+//     if (currentPoint === "#") {
+//       treesEncountered++;
+//     }
+//     currentSlope += right;
+//     i += down;
+//   }
+//   return treesEncountered;
+// }
