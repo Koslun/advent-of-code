@@ -1,22 +1,22 @@
-var fs = require("fs");
+var fs = require('fs');
 
-const text = fs.readFileSync("./2020_day2_input.txt", "utf-8");
+const text = fs.readFileSync('./2020_day2_input.txt', 'utf-8');
 
-const textByLine = text.split("\n");
+const textByLine = text.split('\n');
 
 console.log(
   `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
     textByLine.length * textByLine.length
-  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`
+  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
 );
 
 const validPasswords = countValidPasswordList(textByLine);
 
-console.log("Valid passwords: " + validPasswords);
+console.log('Valid passwords: ' + validPasswords);
 
 const validNewPasswords = countNewValidPasswordList(textByLine);
 
-console.log("Valid with new password policy: " + validNewPasswords);
+console.log('Valid with new password policy: ' + validNewPasswords);
 
 function countValidPasswordList(textByLine) {
   let count = 0;
@@ -29,9 +29,9 @@ function countValidPasswordList(textByLine) {
 }
 
 function isValidPassword(text) {
-  const [interval, letterFluff, password] = text.split(" ");
+  const [interval, letterFluff, password] = text.split(' ');
 
-  const [min, max] = interval.split("-");
+  const [min, max] = interval.split('-');
 
   const keyLetter = letterFluff.substring(0, 1);
 
@@ -60,9 +60,9 @@ function countNewValidPasswordList(textByLine) {
 }
 
 function isNewValidPassword(text) {
-  const [interval, letterFluff, password] = text.split(" ");
+  const [interval, letterFluff, password] = text.split(' ');
 
-  const [min, max] = interval.split("-");
+  const [min, max] = interval.split('-');
 
   const keyLetter = letterFluff.substring(0, 1);
 

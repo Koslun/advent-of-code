@@ -1,13 +1,13 @@
-var fs = require("fs");
+var fs = require('fs');
 
-const text = fs.readFileSync("./2020_day1_input.txt", "utf-8");
+const text = fs.readFileSync('./2020_day1_input.txt', 'utf-8');
 
-const textByLine = text.split("\n");
+const textByLine = text.split('\n');
 
 console.log(
   `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
     textByLine.length * textByLine.length
-  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`
+  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
 );
 
 /**
@@ -42,7 +42,7 @@ function mvp() {
     console.log(
       `Found a pair: (${v0}, ${v1}). Multiplied value: ${
         v0 * v1
-      }. Iterations: ${totalIterations}.`
+      }. Iterations: ${totalIterations}.`,
     );
   } else {
     console.log(`Didn't find a pair using mvp solution.`);
@@ -89,7 +89,7 @@ function mvpThree() {
     console.log(
       `Found a truple: (${v0}, ${v1}, ${v2}). Multiplied value: ${
         v0 * v1 * v2
-      }. Iterations: ${totalIterations}.`
+      }. Iterations: ${totalIterations}.`,
     );
   } else {
     console.log(`Didn't find a truple using mvp solution.`);
@@ -139,7 +139,7 @@ function optimizedMvp(texyByLine, cuttof) {
     console.log(
       `Found a pair: (${v0}, ${v1}). Multiplied value: ${
         v0 * v1
-      }. Iterations: ${totalIterations}.`
+      }. Iterations: ${totalIterations}.`,
     );
   } else {
     console.log(`Didn't find a pair using optimized solution.`);
