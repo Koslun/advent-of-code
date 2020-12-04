@@ -1,7 +1,7 @@
 import { parseFile } from '../util/fileParser';
 
-const text = parseFile('2020_day4_input.txt', __dirname);
-const textMock = parseFile('2020_day4_input.mock.txt', __dirname);
+const text = parseFile('day4.txt', __dirname);
+const textMock = parseFile('day4.mock.txt', __dirname);
 
 export const textByLine = text.split('\n\n');
 export const textByLineMock = textMock.split('\n\n');
