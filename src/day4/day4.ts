@@ -52,18 +52,19 @@ function isValidPassport(passport) {
     //  || optionalFields.includes(key)
     if (requiredFields.includes(key)) {
       let validKey = true;
+      let numValue;
       if ('byr' === key) {
-        let numValue = Number.parseInt(value);
+        numValue = Number.parseInt(value);
         validKey = numValue >= 1920 && numValue <= 2002;
       } else if ('iyr' === key) {
-        let numValue = Number.parseInt(value);
+        numValue = Number.parseInt(value);
         validKey = numValue >= 2010 && numValue <= 2020;
       } else if ('eyr' === key) {
-        let numValue = Number.parseInt(value);
+        numValue = Number.parseInt(value);
         validKey = numValue >= 2020 && numValue <= 2030;
       } else if ('hgt' === key) {
-        let numStr = value.substring(0, value.length - 2);
-        let numValue = Number.parseInt(numStr);
+        const numStr = value.substring(0, value.length - 2);
+        numValue = Number.parseInt(numStr);
         if (value.endsWith('cm')) {
           validKey = numValue >= 150 && numValue <= 193;
         } else if (value.endsWith('in')) {
