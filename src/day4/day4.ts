@@ -1,9 +1,11 @@
-import fs from 'fs';
+import fs = require('fs');
 
-const text = fs.readFileSync('./2020_day4_input.txt', 'utf-8');
-// const text = fs.readFileSync("./2020_day4_input.mock.txt", "utf-8");
+const path = './src/day4/';
+const text = fs.readFileSync(path + '2020_day4_input.txt', 'utf-8');
+const textMock = fs.readFileSync(path + '2020_day4_input.mock.txt', 'utf-8');
 
-const textByLine = text.split('\n\n');
+export const textByLine = text.split('\n\n');
+export const textByLineMock = textMock.split('\n\n');
 
 console.log(
   `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
@@ -11,22 +13,7 @@ console.log(
   }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
 );
 
-console.log('Number of passports: ', textByLine.length);
-
-const passports = segmentPassports(textByLine);
-
-const validList = passports.map(isValidPassport);
-
-let validCount = 0;
-validList.forEach((valid) => {
-  if (valid) {
-    validCount++;
-  }
-});
-
-console.log('Valid passports', validCount);
-
-function segmentPassports(unformattedPassports) {
+export function segmentPassports(unformattedPassports) {
   const passports = [];
   for (let i = 0; i < unformattedPassports.length; i++) {
     const squashedPassportList = unformattedPassports[i].split('\n');
@@ -39,7 +26,7 @@ function segmentPassports(unformattedPassports) {
   return passports;
 }
 
-function isValidPassport(passport) {
+export function isValidPassport(passport) {
   // console.log("passport ", passport);
   const fields = passport.trim().split(' ');
   const requiredFields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
