@@ -1,6 +1,6 @@
-import fs from 'fs';
+import { parseFile } from '../util/fileParser';
 
-const text = fs.readFileSync('./2020_day3_input.txt', 'utf-8');
+const text = parseFile('day3.txt', __dirname);
 
 const textByLine = text.split('\n');
 
@@ -10,7 +10,7 @@ console.log(
   }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
 );
 
-const textMock = fs.readFileSync('./2020_day3_input.mock.txt', 'utf-8');
+const textMock = parseFile('day3.mock.txt', __dirname);
 const textByLineMock = textMock.split('\n');
 
 const treesEncounteredMock = goDownSlopes(textByLineMock, 3, 1);

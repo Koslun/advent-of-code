@@ -1,6 +1,6 @@
-import fs from 'fs';
+import { parseFile } from '../util/fileParser';
 
-const text = fs.readFileSync('./2020_day1_input.txt', 'utf-8');
+const text = parseFile('day1.txt', __dirname);
 
 const textByLine = text.split('\n');
 
