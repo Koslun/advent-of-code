@@ -1,8 +1,7 @@
-import fs = require('fs');
+import { parseFile } from '../util/fileParser';
 
-const path = './src/day4/';
-const text = fs.readFileSync(path + '2020_day4_input.txt', 'utf-8');
-const textMock = fs.readFileSync(path + '2020_day4_input.mock.txt', 'utf-8');
+const text = parseFile('2020_day4_input.txt', __dirname);
+const textMock = parseFile('2020_day4_input.mock.txt', __dirname);
 
 export const textByLine = text.split('\n\n');
 export const textByLineMock = textMock.split('\n\n');
