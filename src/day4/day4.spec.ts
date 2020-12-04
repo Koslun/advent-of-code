@@ -32,7 +32,7 @@ describe('Day 4', () => {
     });
   });
 
-  describe('Mock data', () => {
+  describe('Challenge data', () => {
     it('should load data', () => {
       // total passports
       expect(textByLine.length).toEqual(279);
