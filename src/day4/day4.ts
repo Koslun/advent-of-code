@@ -6,11 +6,11 @@ const textMock = parseFile('day4.mock.txt', __dirname);
 export const textByLine = text.split('\n\n');
 export const textByLineMock = textMock.split('\n\n');
 
-console.log(
-  `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
-    textByLine.length * textByLine.length
-  }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
-);
+// console.log(
+//   `Parsed ${textByLine.length} numbers. O(n) = ${textByLine.length}, O(n^2) = ${
+//     textByLine.length * textByLine.length
+//   }, O(n^3) = ${textByLine.length * textByLine.length * textByLine.length}`,
+// );
 
 export function segmentPassports(unformattedPassports) {
   const passports = [];
